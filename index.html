@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pac-Man</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+    }
+
+    canvas {
+      border: 1px solid #fff;
+      image-rendering: pixelated;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #fff;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <canvas id="game-canvas" width="400" height="400"></canvas>
+    <div id="score">Score: 0</div>
+  </div>
+
+  <script>
+    // Game variables and constants
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const cellSize = 20;
+    const gridWidth = Math.floor(canvas.width / cellSize);
+    const gridHeight = Math.floor(canvas.height / cellSize);
+    let score = 0;
+
+    // Pac-Man position and movement
+    let pacmanX = 1;
+    let pacmanY = 1;
+    let pacmanDirection = 'right';
+
+    // Game loop
+    function gameLoop() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw Pac-Man
+      drawPacMan(pacmanX, pacmanY, pacmanDirection);
+
+      // Update Pac-Man position
+      updatePacManPosition();
+
+      // Display the score
+      updateScore();
+
+      // Request the next frame
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Draw Pac-Man
+    function drawPacMan(x, y, direction) {
+      ctx.beginPath();
+      ctx.arc(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize / 2 - 2, 0, 2 * Math.PI);
+      ctx.fillStyle = '#ffff00';
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    // Update Pac-Man position
+    function updatePacManPosition() {
+      // Add your Pac-Man movement logic here
+    }
+
+    // Update the score display
+    function updateScore() {
+      document.getElementById('score').textContent = `Score: ${score}`;
+    }
+
+    // Start the game
+    gameLoop();
+  </script>
+</body>
+</html>
